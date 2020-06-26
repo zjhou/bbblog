@@ -1,0 +1,12 @@
+{
+  "name": "fufu2020",
+  "version": "1.0.0",
+  "description": "blog",
+  "main": "index.js",
+  "author": "ZjHOU",
+  "license": "MIT",
+  "scripts": {
+    "start": "elm reactor",
+    "build": "elm make src/Main.elm --optimize --output=dist/index.html"
+  }
+}
