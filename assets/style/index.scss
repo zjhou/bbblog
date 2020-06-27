@@ -48,6 +48,10 @@ body {
             color: $theme-yellow;
           }
 
+          &-content {
+            line-height: 2;
+          }
+
           &:not(:last-child):after {
             content: "";
             display: inline-block;
