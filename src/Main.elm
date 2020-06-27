@@ -8,8 +8,6 @@ import Http
 import Json.Decode as D
 
 
-import Browser
-
 type alias Post = { title:String, content:String }
 
 post: D.Decoder Post
@@ -41,7 +39,7 @@ init : () -> (Model, Cmd Msg)
 init _ =
   ( Loading
   , Http.get
-      { url = "http://localhost:3001/api/posts"
+      { url = "https://gblog.vercel.app/api/posts"
       , expect = Http.expectJson GotPosts (D.list post)
       }
   )
@@ -75,6 +73,14 @@ textHtml t =
         Err _ ->
             []
 
+renderBlog: (List Post) -> Html Msg
+renderBlog pLst =
+  div [ class "blog" ]
+    [ div [][]
+    , showPosts pLst
+    , div [][]
+    ]
+
 showPost: Post -> Html Msg
 showPost p =
   div [ class "post" ]
@@ -84,17 +90,25 @@ showPost p =
 
 showPosts: (List Post) -> Html Msg
 showPosts pLst =
-  div []
+  div [class "post-list"]
     (List.map showPost pLst)
+
+spinner: Html Msg
+spinner =
+  div [ class "spinner" ]
+    [ div [ class "square1"] []
+    , div [ class "square2"] []
+    , div [ class "square3"] []
+    ]
 
 view : Model -> Html Msg
 view model =
   case model of
     Failure ->
-      text "error to load posts"
+      text "加载失败!"
 
     Loading ->
-      text "Loading..."
+      spinner
 
     Success posts ->
-      showPosts posts
+      renderBlog posts

@@ -1,0 +1,107 @@
+$theme-yellow: #ffba26;
+
+::-webkit-scrollbar              {
+  /* 1 */
+  width: 2pt;
+}
+::-webkit-scrollbar-button       {
+  /* 2 */
+  display: none;
+}
+::-webkit-scrollbar-track        { /* 3 */ }
+::-webkit-scrollbar-track-piece  { /* 4 */ }
+::-webkit-scrollbar-thumb        {
+  /* 5 */
+  background: $theme-yellow;
+}
+::-webkit-scrollbar-corner       { /* 6 */ }
+::-webkit-resizer                { /* 7 */ }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  // blog begin
+  .blog {
+    display: flex;
+    & > div {
+      flex: 1 1 auto;
+      &.post-list {
+        margin: 120px 0;
+
+        .post {
+          padding-bottom: 15px;
+          margin-bottom: 20px;
+
+          &-title {
+            margin-bottom: 15px;
+            color: $theme-yellow;
+          }
+
+          &:not(:last-child):after {
+            content: "";
+            display: inline-block;
+            width: 30px;
+            border-top: 1pt solid $theme-yellow;
+            position: relative;
+            top: 15px;
+          }
+        }
+      }
+    }
+  }
+
+
+
+  // spinner begin
+  $spinnerWidth: 20px;
+  $spinnerGap: 8px;
+  $spinnerBorderRadius: 6px;
+  $spinnerOffset: $spinnerWidth + $spinnerGap;
+
+  .spinner{
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+
+    & > div {
+      width: $spinnerWidth;
+      height: $spinnerWidth;
+      position: absolute;
+      border-radius: $spinnerBorderRadius;
+    }
+  }
+  .square1, .square2, .square3, .square4 {
+    animation: sk-cubemove 1.2s infinite cubic-bezier(0, 0, 0, 0.97);;
+  }
+  .square1 {
+    background-color: #FFA290;
+    animation-delay: -0.5s;
+  }
+  .square2 {
+    background-color: #FFE6AA;
+    animation-delay: -0.9s;
+  }
+  .square3 {
+    background-color: #D2F5FC;
+    animation-delay: -1.3s;
+  }
+
+
+  @keyframes sk-cubemove {
+    25% { transform: translateX($spinnerOffset)  }
+    50% { transform: translateX($spinnerOffset) translateY($spinnerOffset) }
+    75% { transform: translateX(0px) translateY($spinnerOffset)  }
+  }
+}
